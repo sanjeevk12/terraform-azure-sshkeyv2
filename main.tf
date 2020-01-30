@@ -6,9 +6,9 @@ resource "azurerm_virtual_machine" "vm-linux-sshkey" {
   resource_group_name              = "${var.resource_group_name}"
   vm_size                          = "${var.vm_size}"
   network_interface_ids            = ["${var.nic_id}"]
-  delete_os_disk_on_termination    = "${var.delete_os_disk_on_termination}"
-  delete_data_disks_on_termination = "${var.delete_data_disk_on_termination}"
-  availability_set_id              = "${var.availability_set_id}"
+#  delete_os_disk_on_termination    = "${var.delete_os_disk_on_termination}"
+#  delete_data_disks_on_termination = "${var.delete_data_disk_on_termination}"
+#  availability_set_id              = "${var.availability_set_id}"
   
   storage_image_reference {
     publisher = "${var.publisher}"
@@ -32,13 +32,13 @@ resource "azurerm_virtual_machine" "vm-linux-sshkey" {
   os_profile_linux_config {
     disable_password_authentication = "True"
     #provision_vm_agent = true
-    
+ /*   
     ssh_keys {
       path     = "/home/${var.admin_username}/.ssh/authorized_keys"
       key_data = "${file("${var.ssh_key}")}"
     }
   }
-
+*/
   storage_data_disk {
     name              = "${var.datastorage_diskname}"
     create_option     = "Empty"
@@ -52,6 +52,6 @@ resource "azurerm_virtual_machine" "vm-linux-sshkey" {
     storage_uri = "${var.boot_diagnostics_storage_uri}"
   }
 
-  tags = "${var.tags}"
+#  tags = "${var.tags}"
 
 }
